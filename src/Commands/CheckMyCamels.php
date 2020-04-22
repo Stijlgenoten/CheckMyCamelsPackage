@@ -7,8 +7,7 @@ use Illuminate\Console\GeneratorCommand;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 
-
-class CheckMyCamels extends Command
+class CheckMyCamels extends GeneratorCommand
 {
     /**
      * The name and signature of the console command.

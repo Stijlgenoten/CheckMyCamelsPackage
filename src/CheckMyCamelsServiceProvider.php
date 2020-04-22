@@ -32,7 +32,7 @@ class CheckMyCamelsServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__.'/../config/checkmycamels.php', 'checkmycamels');
+        // $this->mergeConfigFrom(__DIR__.'/../config/checkmycamels.php', 'checkmycamels');
     }
 
     /**
@@ -52,10 +52,10 @@ class CheckMyCamelsServiceProvider extends ServiceProvider
      */
     protected function bootForConsole()
     {
-        // Publishing the configuration file.
-        $this->publishes([
-            __DIR__.'/../config/checkmycamels.php' => config_path('checkmycamels.php'),
-        ], 'checkmycamels.config');
+        // // Publishing the configuration file.
+        // $this->publishes([
+        //     __DIR__.'/../config/checkmycamels.php' => config_path('checkmycamels.php'),
+        // ], 'checkmycamels.config');
 
         // Publish: Artisan check-my-camels command
         $this->commands([
