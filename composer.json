@@ -1,38 +1,27 @@
 {
     "name": "stijlgenoten/checkmycamels",
     "description": "Case sensitive classname checker for Laravel apps",
+    "keywords": ["datacollection", "laravel", "static data", "static array"],
+    "type": "library",
     "license": "MIT",
     "authors": [
         {
             "name": "Wilfred Lepelaar",
-            "email": "wilfredl@stijlgenoten.nl",
-            "homepage": "http://stijlgenoten.nl"
+            "email": "wilfredl@stijlgenoten.nl"
         }
     ],
-    "homepage": "https://github.com/stijlgenoten/checkmycamels",
-    "keywords": ["Laravel", "CheckMyCamels"],
+    "minimum-stability": "dev",
     "require": {
-        "illuminate/support": "~5|~6|~7"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "^8.0",
-        "mockery/mockery": "^1.1",
-        "orchestra/testbench": "~3|~4",
-        "sempro/phpunit-pretty-print": "^1.0"
+         "illuminate/support": "~5|~6|~7"
     },
     "autoload": {
         "psr-4": {
             "Stijlgenoten\\CheckMyCamels\\": "src/"
         }
     },
-    "autoload-dev": {
-        "psr-4": {
-            "Stijlgenoten\\CheckMyCamels\\Tests\\": "tests"
-        }
-    },
     "extra": {
         "laravel": {
-            "providers": [
+           "providers": [
                 "Stijlgenoten\\CheckMyCamels\\CheckMyCamelsServiceProvider"
             ],
             "aliases": {
