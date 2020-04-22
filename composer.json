@@ -1,7 +1,7 @@
 {
     "name": "stijlgenoten/checkmycamels",
-    "description": ":package_description",
-    "license": "license",
+    "description": "Case sensitive classname checker for Laravel apps",
+    "license": "MIT",
     "authors": [
         {
             "name": "Wilfred Lepelaar",
