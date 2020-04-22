@@ -4,9 +4,9 @@
     "license": "license",
     "authors": [
         {
-            "name": "author name",
-            "email": "author email",
-            "homepage": "author homepage"
+            "name": "Wilfred Lepelaar",
+            "email": "wilfredl@stijlgenoten",
+            "homepage": "http://stijlgenoten.nl"
         }
     ],
     "homepage": "https://github.com/stijlgenoten/checkmycamels",
