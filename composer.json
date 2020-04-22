@@ -16,14 +16,16 @@
             "Stijlgenoten\\CheckMyCamels\\": "src/"
         }
     },
+    "require-dev": {
+    },
     "extra": {
         "laravel": {
-           "providers": [
-                "Stijlgenoten\\CheckMyCamels\\CheckMyCamelsServiceProvider"
-            ],
-            "aliases": {
-                "CheckMyCamels": "Stijlgenoten\\CheckMyCamels\\Facades\\CheckMyCamels"
-            }
+         "providers": [
+            "Stijlgenoten\\CheckMyCamels\\CheckMyCamelsServiceProvider"
+        ],
+         "aliases": {
+            "CheckMyCamels": "Stijlgenoten\\CheckMyCamels\\Facades\\CheckMyCamels"
         }
     }
+}
 }
