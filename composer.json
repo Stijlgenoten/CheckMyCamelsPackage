@@ -1,7 +1,7 @@
 {
     "name": "stijlgenoten/checkmycamels",
     "description": "Case sensitive classname checker for Laravel apps",
-    "keywords": ["datacollection", "laravel", "static data", "static array"],
+    "keywords": ["Case sensitive", "classname", "laravel", "check"],
     "type": "library",
     "license": "MIT",
     "authors": [
@@ -11,9 +11,6 @@
         }
     ],
     "minimum-stability": "dev",
-    "require": {
-         "illuminate/support": "~5|~6|~7"
-    },
     "autoload": {
         "psr-4": {
             "Stijlgenoten\\CheckMyCamels\\": "src/"
