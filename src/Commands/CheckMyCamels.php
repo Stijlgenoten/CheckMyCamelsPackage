@@ -3,11 +3,10 @@
 namespace Stijlgenoten\CheckMyCamels\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Console\GeneratorCommand;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 
-class CheckMyCamels extends GeneratorCommand
+class CheckMyCamels extends Command
 {
     /**
      * The name and signature of the console command.
