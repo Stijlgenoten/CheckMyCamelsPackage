@@ -12,7 +12,7 @@ This is where your description should go. Take a look at [contributing.md](contr
 Via Composer
 
 ``` bash
-$ composer require stijlgenoten/checkmycamels
+$ composer require stijlgenoten/check-my-camels
 ```
 
 ## Usage
@@ -23,26 +23,21 @@ Please see the [changelog](changelog.md) for more information on what has change
 
 ## Testing
 
+In the package folder run:
+
 ``` bash
-$ composer test
+$ composer install
+$ phpunit
 ```
 
 ## Contributing
 
 Please see [contributing.md](contributing.md) for details and a todolist.
 
-## Security
-
-If you discover any security related issues, please email author email instead of using the issue tracker.
-
-## Credits
-
-- [author name][link-author]
-- [All Contributors][link-contributors]
 
 ## License
 
-license. Please see the [license file](license.md) for more information.
+MIT license. Please see the [license file](license.md) for more information.
 
 [ico-version]: https://img.shields.io/packagist/v/stijlgenoten/checkmycamels.svg?style=flat-square
 [ico-downloads]: https://img.shields.io/packagist/dt/stijlgenoten/checkmycamels.svg?style=flat-square
