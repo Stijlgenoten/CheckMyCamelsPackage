@@ -3,23 +3,15 @@
 namespace Stijlgenoten\CheckMyCamels;
 
 use Illuminate\Support\ServiceProvider;
-use Stijlgenoten\CheckMyCamels\Commands\CheckMyCamels;
+use Stijlgenoten\CheckMyCamels\CheckMyCamels;
+use Stijlgenoten\CheckMyCamels\Commands\CheckMyCamelsCommand;
+
 
 class CheckMyCamelsServiceProvider extends ServiceProvider
 {
-    /**
-     * Perform post-registration booting of services.
-     *
-     * @return void
-     */
+
     public function boot()
     {
-        // $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'stijlgenoten');
-        // $this->loadViewsFrom(__DIR__.'/../resources/views', 'stijlgenoten');
-        // $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
-        // $this->loadRoutesFrom(__DIR__.'/routes.php');
-
-        // Publishing is only necessary when using the CLI.
         if ($this->app->runningInConsole()) {
             $this->bootForConsole();
         }
@@ -32,7 +24,12 @@ class CheckMyCamelsServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        // $this->mergeConfigFrom(__DIR__.'/../config/checkmycamels.php', 'checkmycamels');
+        $this->mergeConfigFrom(__DIR__.'/../config/checkmycamels.php', 'checkmycamels');
+
+        // Register the service the package provides.
+        $this->app->singleton('checkmycamels', function ($app) {
+            return new CheckMyCamels;
+        });
     }
 
     /**
@@ -42,24 +39,19 @@ class CheckMyCamelsServiceProvider extends ServiceProvider
      */
     public function provides()
     {
-        return [];
+        return ['checkmycamels'];
     }
-    
-    /**
-     * Console-specific booting.
-     *
-     * @return void
-     */
     protected function bootForConsole()
     {
-        // // Publishing the configuration file.
-        // $this->publishes([
-        //     __DIR__.'/../config/checkmycamels.php' => config_path('checkmycamels.php'),
-        // ], 'checkmycamels.config');
+        // Publishing the configuration file.
+        $this->publishes([
+            __DIR__.'/../config/checkmycamelsserviceprovider.php' => config_path('checkmycamelsserviceprovider.php'),
+        ], 'checkmycamelsserviceprovider.config');
 
-        // Publish: Artisan check-my-camels command
         $this->commands([
-            CheckMyCamels::class
+            CheckMyCamelsCommand::class
         ]);
+
     }
+
 }

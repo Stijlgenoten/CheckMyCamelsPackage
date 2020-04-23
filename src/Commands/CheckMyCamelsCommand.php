@@ -6,7 +6,7 @@ use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 
-class CheckMyCamels extends Command
+class CheckMyCamelsCommand extends Command
 {
     /**
      * The name and signature of the console command.
@@ -43,39 +43,47 @@ class CheckMyCamels extends Command
 
         foreach ($namespaces as $index => $namespace) {
             $currentNamespace  = rtrim($index, '\\');
-            $unreadableClasses = self::getClassesInNamespace($currentNamespace);
+            $classes = self::getClassesInNamespace($currentNamespace);
 
-            // get files
-            $this->info(' Checking: ' .$unreadableClasses['counted_classes'].' files');
+            $data = [
+                'counted_classes' => self::getCountedClasses($classes),
+                'camelErrors'   => self::getCamelCaseErrors($classes),
+                'undefindedClasses' => self::getUndefindedClasses($classes),
+            ];
+
+            $this->info('Checking...');
+            $this->info(' Checked: ' .$data['counted_classes'].' files');
             sleep(1);
 
-            if ($unreadableClasses) {
-                if (count($unreadableClasses['camalErrors'])) {
+            if ($data) {
+                if (count($data['camelErrors'])) {
                     $this->info('');
-                    $this->error('There are ' . count($unreadableClasses['camalErrors']) . ' strange camel(s) walking around in your app');
+                    $this->error('There are ' . count($data['camelErrors']) . ' strange camel(s) walking around in your app');
                     $this->info('');
-                    foreach ($unreadableClasses['camalErrors'] as $classname) {
+                    foreach ($data['camelErrors'] as $classname) {
                         $this->info($classname);
                     }
                     $this->info('');
                 }
-                if (count($unreadableClasses['classNotFound'])) {
+                if (count($data['undefindedClasses'])) {
                     $this->info('');
-                    $this->error('Found ' . count($unreadableClasses['classNotFound']) . ' wrong named camels');
+                    $this->error('Found ' . count($data['undefindedClasses']) . ' wrong named camels');
                     $this->info('');
-                    foreach ($unreadableClasses['classNotFound'] as $classname) {
+                    foreach ($data['undefindedClasses'] as $classname) {
                         $this->info($classname);
                     }
                     $this->info('');
                 }
 
-                if (!count($unreadableClasses['camalErrors']) && !count($unreadableClasses['camalErrors'])) {
+                if (!count($data['camelErrors']) && !count($data['camelErrors'])) {
                     $this->info('');
                     $this->info(' > No strange camels in the house!');
                     $this->info('');
                 }
             }
         }
+
+        $this->info('Done!');
     }
 
     public static function scanAllDir($dir)
@@ -108,14 +116,10 @@ class CheckMyCamels extends Command
             return $namespace . '\\' . str_replace('.php', '', $file);
         }, $files);
 
-        return [
-            'counted_classes' => count($classes),
-            'camalErrors'   => self::getCalelErrors($classes),
-            'classNotFound' => self::classNotFound($classes),
-        ];
+        return $classes;
     }
 
-    private static function getCalelErrors($classes)
+    public static function getCamelCaseErrors($classes)
     {
         return array_filter($classes, function ($possibleClass) {
             if (class_exists($possibleClass) && !trait_exists($possibleClass)) {
@@ -127,7 +131,7 @@ class CheckMyCamels extends Command
     }
 
 
-    private static function classNotFound($classes)
+    public static function getUndefindedClasses($classes)
     {
         return array_filter($classes, function ($possibleClass) {
             if (!class_exists($possibleClass) && !trait_exists($possibleClass)) {
@@ -136,7 +140,12 @@ class CheckMyCamels extends Command
         });
     }
 
-    private static function getDefinedNamespaces()
+    public static function getCountedClasses($classes){
+        return count($classes);
+    }
+
+
+    public static function getDefinedNamespaces()
     {
         $composerJsonPath =  base_path() . '/' . 'composer.json';
         $composerConfig   = json_decode(file_get_contents($composerJsonPath));
@@ -145,7 +154,7 @@ class CheckMyCamels extends Command
         return (array) $composerConfig->autoload->$psr;
     }
 
-    private static function getNamespaceDirectory($namespace)
+    public static function getNamespaceDirectory($namespace)
     {
         $composerNamespaces = self::getDefinedNamespaces();
 
