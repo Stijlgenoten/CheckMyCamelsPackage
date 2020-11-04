@@ -75,7 +75,7 @@ class CheckMyCamelsCommand extends Command
                     $this->info('');
                 }
 
-                if (!count($data['camelErrors']) && !count($data['camelErrors'])) {
+                if (!count($data['camelErrors']) && !count($data['undefindedClasses'])) {
                     $this->info('');
                     $this->info(' > No strange camels in the house!');
                     $this->info('');
@@ -134,7 +134,7 @@ class CheckMyCamelsCommand extends Command
     public static function getUndefindedClasses($classes)
     {
         return array_filter($classes, function ($possibleClass) {
-            if (!class_exists($possibleClass) && !trait_exists($possibleClass)) {
+            if (!class_exists($possibleClass) && !interface_exists($possibleClass) && !trait_exists($possibleClass)) {
                 return true;
             }
         });
